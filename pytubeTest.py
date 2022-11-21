@@ -10,4 +10,5 @@ stream = myVideo.streams
 
 for stream in myVideo.streams:
     print(f"{stream.filesize/1024/1024}--{stream.resolution}--{stream.itag}")
-    
+
+downloadITag = input("NOw choose the video and write the iTag: ")    
