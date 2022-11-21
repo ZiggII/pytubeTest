@@ -1,7 +1,7 @@
 from pytube import YouTube
 
 myVideo = YouTube(input("Enter the video link: "))
-
+m
 
 stream = myVideo.streams
 
@@ -15,7 +15,7 @@ while printAgain == True and downloadITag != "exit":
         downloadITag = input("Now choose the video and write the iTag: ")    
 
         whatToDownload = myVideo.streams.get_by_itag(downloadITag)
-        whatToDownload.download
+        whatToDownload.download(output_path="/storage/emulated/0/Video")
         printAgain = False
     except:
         print("Try again")
