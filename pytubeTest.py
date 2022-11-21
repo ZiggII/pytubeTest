@@ -9,5 +9,5 @@ stream = myVideo.streams
 #print(stream.)
 
 for stream in myVideo.streams:
-    print(f"{stream.filesize/1024/1024}--{stream.resolution}")
+    print(f"{stream.filesize/1024/1024}--{stream.resolution}--{stream.itag}")
     
