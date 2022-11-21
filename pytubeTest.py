@@ -1,7 +1,6 @@
 from pytube import YouTube
 
 myVideo = YouTube(input("Enter the video link: "))
-m
 
 stream = myVideo.streams
 
