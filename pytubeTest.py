@@ -4,10 +4,26 @@ myVideo = YouTube(input("Enter the video link: "))
 
 stream = myVideo.streams
 
+print("What do you want to do?\n1 - Download YouTube video\n2 - Create a path file")
+whatToDo = input("Type your choice: ")
+
+while True:
+    if whatToDo == 1:
+        break
+    elif whatToDo == 2:
+        openedFile = open("pathFile.txt", "w")
+        outputPath = input("Paste the output path here: ")
+        openedFile.write(outputPath)
+        openedFile.close()
+    else:
+        whatToDo = input("Invalid input. (other than 1 or 2)\nTry again: ")
+
 try:
     opened_file = open("pathFile.txt", "r")
-except FileNotFoundError:
-    print("Fail, try creating a path file, for that restart application and select the option...")
+except FileNotFoundError as e:
+    print(e)
+except:
+    print("Error, failed to open path file")
 
 for stream in myVideo.streams:
     print(f"{stream.filesize/1024/1024}--{stream.resolution}--{stream.itag}")
@@ -16,7 +32,7 @@ downloadITag = None
 printAgain = True
 while printAgain == True and downloadITag != "exit":
     try:
-        downloadITag = input("Now choose the video and write the iTag: ")    
+        downloadITag = input("Type exit to exit\nNow choose the video and write the iTag: ")
 
         whatToDownload = myVideo.streams.get_by_itag(downloadITag)
         #find a way to specify output path
