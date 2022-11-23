@@ -1,6 +1,6 @@
 from pytube import YouTube
 
-print("What do you want to do?\n1 - Download YouTube video\n2 - Create a path file")
+print("What do you want to do?\n1 - Download YouTube video\n2 - Create a path file\nexit to quit")
 whatToDo = input("Type your choice: ")
 
 def specifyOutputPath():
@@ -15,6 +15,8 @@ while True:
     elif whatToDo == "2":
         specifyOutputPath()
         break
+    elif whatToDo == "exit":
+        quit()
     else:
         whatToDo = input("Invalid input. (other than 1 or 2)\nTry again: ")
 
@@ -37,7 +39,7 @@ downloadITag = None
 printAgain = True
 while printAgain == True and downloadITag != "exit":
     try:
-        downloadITag = input("Type exit to exit\nChoose the video and write the iTag: ")
+        downloadITag = input("Type exit to quit\nChoose the video and write the iTag: ")
 
         whatToDownload = myVideo.streams.get_by_itag(downloadITag)
 
