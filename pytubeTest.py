@@ -7,14 +7,17 @@ stream = myVideo.streams
 print("What do you want to do?\n1 - Download YouTube video\n2 - Create a path file")
 whatToDo = input("Type your choice: ")
 
+def specifyOutputPath():
+    openedFile = open("pathFile.txt", "w")
+    outputPath = input("Paste the output path here: ")
+    openedFile.write(outputPath)
+    openedFile.close()
+
 while True:
     if whatToDo == 1:
         break
     elif whatToDo == 2:
-        openedFile = open("pathFile.txt", "w")
-        outputPath = input("Paste the output path here: ")
-        openedFile.write(outputPath)
-        openedFile.close()
+        specifyOutputPath()
         break
     else:
         whatToDo = input("Invalid input. (other than 1 or 2)\nTry again: ")
@@ -23,6 +26,7 @@ try:
     opened_file = open("pathFile.txt", "r")
 except FileNotFoundError as e:
     print(e)
+    specifyOutputPath()
 except:
     print("Error, failed to open path file")
 
