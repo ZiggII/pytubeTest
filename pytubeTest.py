@@ -1,9 +1,5 @@
 from pytube import YouTube
 
-myVideo = YouTube(input("Enter the video link: "))
-
-stream = myVideo.streams
-
 print("What do you want to do?\n1 - Download YouTube video\n2 - Create a path file")
 whatToDo = input("Type your choice: ")
 
@@ -29,6 +25,10 @@ except FileNotFoundError as e:
     specifyOutputPath()
 except:
     print("Error, failed to open path file")
+
+myVideo = YouTube(input("Enter the video link: "))
+
+stream = myVideo.streams
 
 for stream in myVideo.streams:
     print(f"{stream.filesize/1024/1024}--{stream.resolution}--{stream.itag}")
