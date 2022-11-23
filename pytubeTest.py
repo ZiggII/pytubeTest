@@ -37,12 +37,14 @@ downloadITag = None
 printAgain = True
 while printAgain == True and downloadITag != "exit":
     try:
-        downloadITag = input("Type exit to exit\nNow choose the video and write the iTag: ")
+        downloadITag = input("Type exit to exit\nChoose the video and write the iTag: ")
 
         whatToDownload = myVideo.streams.get_by_itag(downloadITag)
-        #find a way to specify output path
+
         whatToDownload.download(output_path=opened_file.read())
         printAgain = False
     except:
         print("Try again")
         printAgain = True
+
+opened_file.close()
