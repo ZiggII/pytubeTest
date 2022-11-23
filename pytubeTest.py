@@ -15,6 +15,7 @@ while True:
         outputPath = input("Paste the output path here: ")
         openedFile.write(outputPath)
         openedFile.close()
+        break
     else:
         whatToDo = input("Invalid input. (other than 1 or 2)\nTry again: ")
 
