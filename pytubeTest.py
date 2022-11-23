@@ -42,7 +42,7 @@ while printAgain == True and downloadITag != "exit":
         downloadITag = input("Type exit to quit\nChoose the video and write the iTag: ")
 
         whatToDownload = myVideo.streams.get_by_itag(downloadITag)
-
+        #why is it downloading as video????? Not sound????
         whatToDownload.download(output_path=opened_file.read())
         printAgain = False
     except:
