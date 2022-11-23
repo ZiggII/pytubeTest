@@ -10,9 +10,9 @@ def specifyOutputPath():
     openedFile.close()
 
 while True:
-    if whatToDo == 1:
+    if whatToDo == "1":
         break
-    elif whatToDo == 2:
+    elif whatToDo == "2":
         specifyOutputPath()
         break
     else:
