@@ -1,4 +1,5 @@
 from pytube import YouTube
+from pytube.cli import on_progress  
 
 print("What do you want to do?\n1 - Download YouTube video\n2 - Create a path file\nexit to quit")
 whatToDo = input("Type your choice: ")
@@ -8,6 +9,14 @@ def specifyOutputPath():
     outputPath = input("Paste the output path here: ")
     openedFile.write(outputPath)
     openedFile.close()
+
+def progress_function(self,stream, chunk,file_handle, bytes_remaining):
+    size = stream.filesize
+    p = 0
+    while p<=100:
+        progress = p
+        print(f"{p}%")
+        p = size/(size-bytes_remaining)
 
 while True:
     if whatToDo == "1":
@@ -28,7 +37,7 @@ except FileNotFoundError as e:
 except:
     print("Error, failed to open path file")
 
-myVideo = YouTube(input("Enter the video link: "))
+myVideo = YouTube(input("Enter the video link: "), on_progress_callback=on_progress)
 
 stream = myVideo.streams
 
