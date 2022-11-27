@@ -42,7 +42,7 @@ myVideo = YouTube(input("Enter the video link: "), on_progress_callback=on_progr
 stream = myVideo.streams
 
 for stream in myVideo.streams:
-    print(f"{stream.filesize/1024/1024}--{stream.resolution}--{stream.itag}")
+    print(f"{stream.filesize/1024/1024}--{stream.resolution}--{stream.itag}--{stream.method}")
 
 downloadITag = None
 printAgain = True
