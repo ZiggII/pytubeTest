@@ -42,7 +42,14 @@ myVideo = YouTube(input("Enter the video link: "), on_progress_callback=on_progr
 stream = myVideo.streams
 
 for stream in myVideo.streams:
-    print(f"{stream.filesize/1024/1024}--{stream.resolution}--{stream.itag}--{stream.is_progressive}")
+    if stream.is_progressive is True:
+        streamType = "Audio and video"
+    elif stream.includes_audio_track is True:
+        streamType = "Audio and video"
+    else:
+        streamType = "Only video"
+        
+    print(f"{stream.filesize/1024/1024}--{stream.resolution}--{stream.itag}--{streamType}")
 
 #https://github.com/pytube/pytube/blob/master/pytube/streams.py line 90
 
