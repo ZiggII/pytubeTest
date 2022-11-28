@@ -44,7 +44,7 @@ stream = myVideo.streams
 for stream in myVideo.streams:
     print(f"{stream.filesize/1024/1024}--{stream.resolution}--{stream.itag}--{stream.method}")
 
-#https://github.com/pytube/pytube/blob/master/pytube/streams.py
+#https://github.com/pytube/pytube/blob/master/pytube/streams.py line 90
 
 downloadITag = None
 printAgain = True
