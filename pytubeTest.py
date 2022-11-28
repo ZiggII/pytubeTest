@@ -42,7 +42,7 @@ myVideo = YouTube(input("Enter the video link: "), on_progress_callback=on_progr
 stream = myVideo.streams
 
 for stream in myVideo.streams:
-    print(f"{stream.filesize/1024/1024}--{stream.resolution}--{stream.itag}--{stream.method}")
+    print(f"{stream.filesize/1024/1024}--{stream.resolution}--{stream.itag}--{stream.is_progressive}")
 
 #https://github.com/pytube/pytube/blob/master/pytube/streams.py line 90
 
