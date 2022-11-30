@@ -50,7 +50,7 @@ for stream in myVideo.streams:
         streamType = "Only video"
         needsToBeMerged = True
         
-    print(f"{round(stream.filesize/1024/1024, 3)}\t{stream.resolution}\t{stream.itag}\t{streamType}")
+    print(f"{round(stream.filesize/1024/1024, 3)}\t{stream.resolution}\t{stream.itag}\t{stream.parse_codecs()}")
 
 #https://github.com/pytube/pytube/blob/master/pytube/streams.py line 90
 
@@ -71,8 +71,6 @@ while printAgain == True and downloadITag != "exit":
 opened_file.close()
 print("finished")
 
-if needsToBeMerged is True:
-    print("You only downloaded video, do you want to download audio as well (will be automatically merged)")
 
 #bypass apge restrictions
 #merge audio and video
