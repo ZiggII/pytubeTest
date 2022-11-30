@@ -29,6 +29,7 @@ while True:
     else:
         whatToDo = input("Invalid input. (other than 1 or 2)\nTry again: ")
 
+"""
 try:
     opened_file = open("pathFile.txt", "r")
 except FileNotFoundError as e:
@@ -36,16 +37,13 @@ except FileNotFoundError as e:
     specifyOutputPath()
 except:
     print("Error, failed to open path file")
+"""
 
 myVideo = YouTube(input("Enter the video link: "), on_progress_callback=on_progress)
 
 stream = myVideo.streams
 
 for stream in myVideo.streams:
-<<<<<<< HEAD
-    print(f"{stream.filesize/1024/1024}--{stream.resolution}--{stream.itag}--{stream.method}")
-    
-=======
     if stream.is_progressive is True:
         streamType = "Audio and video"
     elif stream.includes_audio_track is True:
@@ -53,10 +51,9 @@ for stream in myVideo.streams:
     else:
         streamType = "Only video"
         
-    print(f"{stream.filesize/1024/1024}--{stream.resolution}--{stream.itag}--{streamType}")
+    print(f"{round(stream.filesize/1024/1024, 3)}\t{stream.resolution}\t{stream.itag}\t{streamType}")
 
 #https://github.com/pytube/pytube/blob/master/pytube/streams.py line 90
->>>>>>> 3c9d261837c865f37d01fef7f4165402bcb56842
 
 downloadITag = None
 printAgain = True
@@ -73,3 +70,6 @@ while printAgain == True and downloadITag != "exit":
         printAgain = True
 
 opened_file.close()
+
+#bypass apge restrictions
+#merge audio and video
