@@ -29,7 +29,6 @@ while True:
     else:
         whatToDo = input("Invalid input. (other than 1 or 2)\nTry again: ")
 
-"""
 try:
     opened_file = open("pathFile.txt", "r")
 except FileNotFoundError as e:
@@ -37,7 +36,6 @@ except FileNotFoundError as e:
     specifyOutputPath()
 except:
     print("Error, failed to open path file")
-"""
 
 myVideo = YouTube(input("Enter the video link: "), on_progress_callback=on_progress)
 
@@ -50,6 +48,7 @@ for stream in myVideo.streams:
         streamType = "Audio and video"
     else:
         streamType = "Only video"
+        needsToBeMerged = True
         
     print(f"{round(stream.filesize/1024/1024, 3)}\t{stream.resolution}\t{stream.itag}\t{streamType}")
 
@@ -68,8 +67,12 @@ while printAgain == True and downloadITag != "exit":
     except:
         print("Try again")
         printAgain = True
-
+        
 opened_file.close()
+print("finished")
+
+if needsToBeMerged is True:
+    print("You only downloaded video, do you want to download audio as well (will be automatically merged)")
 
 #bypass apge restrictions
 #merge audio and video
