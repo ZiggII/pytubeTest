@@ -40,15 +40,12 @@ except:
 myVideo = YouTube(input("Enter the video link: "), on_progress_callback=on_progress)
 
 stream = myVideo.streams
+print(myVideo.title)
 
 for stream in myVideo.streams:
-    if stream.is_progressive is True:
-        streamType = "Audio and video"
-    elif stream.includes_audio_track is True:
-        streamType = "Audio and video"
-    else:
-        streamType = "Only video"
-        needsToBeMerged = True
+    if stream.resolution is None:
+        streamType = "Only audio"
+        isVideo = False
         
     print(f"{round(stream.filesize/1024/1024, 3)}\t{stream.resolution}\t{stream.itag}\t{stream.parse_codecs()}")
 
@@ -72,5 +69,6 @@ opened_file.close()
 print("finished")
 
 
+#print file format as well
 #bypass apge restrictions
 #merge audio and video
