@@ -73,8 +73,9 @@ if whatToDownload.video_codec is None:
         if convertToMp3 == "y" or convertToMp3 == "n" or convertToMp3 == "exit":
             continue_loop = False
     if convertToMp3 == "y":
-        path = Path(opened_file.read+"/"+myVideo.title+"mp4")
-        path.rename(path.with_suffix('.mp3'))
+        path = opened_file.read + "/" + myVideo.title + "mp4"
+        p = Path(path)
+        p.rename(p.with_suffix('.mp3'))
         
 opened_file.close()
 print("finished")
