@@ -67,9 +67,11 @@ while printAgain == True and downloadITag != "exit":
         printAgain = True
 
 if whatToDownload.video_codec is None:
-    convertToMp3 = input("Do you want to change the file format from mp4 to mp3? (y/n)\nType your choice: ")
-    while convertToMp3 == "y" or convertToMp3 == "n":
-        convertToMp3 = input("Do you want to change from mp4 to mp3? (y/n)\nType your choice: ")
+    continue_loop = True
+    while continue_loop is True:
+        convertToMp3 = input("Do you want to change the file format from mp4 to mp3? (y/n)\nType your choice: ")
+        if convertToMp3 == "y" or convertToMp3 == "n" or convertToMp3 == "exit":
+            continue_loop = False
     if convertToMp3 == "y":
         path = Path(opened_file.read+"/"+myVideo.title+"mp4")
         path.rename(path.with_suffix('.mp3'))
