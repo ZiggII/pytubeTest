@@ -72,10 +72,11 @@ if whatToDownload.video_codec is None:
         convertToMp3 = input("Do you want to change the file format from mp4 to mp3? (y/n)\nType your choice: ")
         if convertToMp3 == "y" or convertToMp3 == "n" or convertToMp3 == "exit":
             continue_loop = False
+        else:
+            print("Invalid input, try again")
     if convertToMp3 == "y":
-        path = opened_file.read + "/" + myVideo.title + "mp4"
-        p = Path(path)
-        p.rename(p.with_suffix('.mp3'))
+        path = opened_file.read /  myVideo.title + ".mp4"
+        path.rename(path.with_suffix('.mp3'))
         
 opened_file.close()
 print("finished")
