@@ -1,5 +1,6 @@
 from pytube import YouTube
 from pytube.cli import on_progress  
+from pathlib import Path
 
 print("What do you want to do?\n1 - Download YouTube video\n2 - Create a path file\nexit to quit")
 whatToDo = input("Type your choice: ")
@@ -61,6 +62,11 @@ while printAgain == True and downloadITag != "exit":
         #why is it downloading as video????? Not sound????
         whatToDownload.download(output_path=opened_file.read())
         printAgain = False
+        if whatToDownload.video_codec is None:
+            while convertToMp3 == "y" or convertToMp3 == "n":
+                convertToMp3 = input("Do you want to change from mp4 to mp3? (y/n)\nType your choice: ")
+            if convertToMp3 == "y":
+
     except:
         print("Try again")
         printAgain = True
@@ -69,6 +75,7 @@ opened_file.close()
 print("finished")
 
 
+#download as audio
 #print file format as well
 #bypass apge restrictions
 #merge audio and video
