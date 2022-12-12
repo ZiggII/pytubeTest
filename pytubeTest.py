@@ -77,7 +77,7 @@ if whatToDownload.video_codec is None:
     if convertToMp3 == "y":
         folder_path = Path(opened_file.read)
         video_name = Path(myVideo.title + "mp4")
-        path = folder_path / video_name
+        path = folder_path / "The Script - Superheroes (Official Video).mp4"
         path.rename(path.with_suffix('.mp3'))
         
 opened_file.close()
