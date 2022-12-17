@@ -60,11 +60,7 @@ while printAgain1 == True:
 stream = myVideo.streams
 print(myVideo.title)
 
-for stream in myVideo.streams:
-    if stream.resolution is None:
-        streamType = "Only audio"
-        isVideo = False
-        
+for stream in myVideo.streams: 
     print(f"{round(stream.filesize/1024/1024, 3)}\t{stream.resolution}\t{stream.itag}\t{stream.parse_codecs()}")
 
 downloadITag = None
@@ -114,7 +110,24 @@ if whatToDownload.audio_codec is None:
             continue_loop2 = False
         else:
             print("Invalid input, try again")
-#    if download_audio == "y":
+    if download_audio == "y":
+        for stream in myVideo.streams:
+            if stream.resolution is None:
+                print(f"{round(stream.filesize/1024/1024, 3)}\t{stream.itag}\t{stream.parse_codecs()}")
+        
+        printAgain3 = True
+        while printAgain3 == True:
+            try:
+                downloadITag = input("Type exit to quit\nChoose the video and write the iTag: ")
+
+                whatToDownload = myVideo.streams.get_by_itag(downloadITag)
+                whatToDownload.download(output_path=path_file_content)
+                printAgain3 = False
+            except:
+                print("Try again")
+                printAgain3 = True
+        
+        
 
 
 opened_file.close()
