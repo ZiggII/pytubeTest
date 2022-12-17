@@ -1,6 +1,7 @@
 from pytube import YouTube
 from pytube.cli import on_progress  
 from pathlib import Path
+import os
 
 print("What do you want to do?\n1 - Download YouTube video\n2 - Create a path file\nexit to quit")
 whatToDo = input("Type your choice: ")
@@ -30,6 +31,8 @@ while True:
     else:
         whatToDo = input("Invalid input. (other than 1 or 2)\nTry again: ")
 
+
+#open a path file and create a variable for its contents
 try:
     opened_file = open("pathFile.txt", "r")
 except FileNotFoundError as e:
@@ -38,7 +41,20 @@ except FileNotFoundError as e:
 except:
     print("Error, failed to open path file")
 
-myVideo = YouTube(input("Enter the video link: "), on_progress_callback=on_progress)
+path_file_content = opened_file.read()
+#-------------------------------
+
+
+#Getting infromation about the video from the link
+printAgain1 = True
+while printAgain1 == True:
+    try:
+        myVideo = YouTube(input("Enter the video link: "), on_progress_callback=on_progress)
+        printAgain1 = False
+    except:
+        print("Try again")
+        printAgain1 = True
+#-----------------------
 
 stream = myVideo.streams
 print(myVideo.title)
@@ -50,22 +66,22 @@ for stream in myVideo.streams:
         
     print(f"{round(stream.filesize/1024/1024, 3)}\t{stream.resolution}\t{stream.itag}\t{stream.parse_codecs()}")
 
-#https://github.com/pytube/pytube/blob/master/pytube/streams.py line 90
-
 downloadITag = None
 printAgain = True
-while printAgain == True and downloadITag != "exit":
+while printAgain2 == True and downloadITag != "exit":
     try:
         downloadITag = input("Type exit to quit\nChoose the video and write the iTag: ")
 
         whatToDownload = myVideo.streams.get_by_itag(downloadITag)
         #why is it downloading as video????? Not sound????
-        whatToDownload.download(output_path=opened_file.read())
-        printAgain = False
+        whatToDownload.download(output_path=path_file_content)
+        printAgain2 = False
     except:
         print("Try again")
-        printAgain = True
+        printAgain2 = True
 
+
+#change extension from mp4 to mp3
 if whatToDownload.video_codec is None:
     continue_loop = True
     while continue_loop is True:
@@ -75,10 +91,14 @@ if whatToDownload.video_codec is None:
         else:
             print("Invalid input, try again")
     if convertToMp3 == "y":
-        folder_path = Path(opened_file.read())
-        video_name = myVideo.title + ".mp4"
-        path = Path(myVideo.title + ".mp4")
-        path.rename(path.with_suffix(".mp3"))
+        folder_path = path_file_content
+        old_video_name = myVideo.title + ".mp4"
+        new_video_name = myVideo.title + ".mp3"
+        Folder_path = Path(folder_path)
+        old_path = Folder_path / old_video_name
+        new_path = Folder_path / new_video_name
+        os.rename(old_path, new_path)
+#-----------------------------------
         
 opened_file.close()
 print("finished")
