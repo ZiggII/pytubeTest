@@ -38,6 +38,7 @@ try:
 except FileNotFoundError as e:
     print(e)
     specifyOutputPath()
+    opened_file = open("pathFile.txt", "r")
 except:
     print("Error, failed to open path file")
 
@@ -49,7 +50,7 @@ path_file_content = opened_file.read()
 printAgain1 = True
 while printAgain1 == True:
     try:
-        myVideo = YouTube(input("Enter the video link: "), on_progress_callback=on_progress)
+        myVideo = YouTube(input("Enter the video link: "))
         printAgain1 = False
     except:
         print("Try again")
@@ -67,7 +68,7 @@ for stream in myVideo.streams:
     print(f"{round(stream.filesize/1024/1024, 3)}\t{stream.resolution}\t{stream.itag}\t{stream.parse_codecs()}")
 
 downloadITag = None
-printAgain = True
+printAgain2 = True
 while printAgain2 == True and downloadITag != "exit":
     try:
         downloadITag = input("Type exit to quit\nChoose the video and write the iTag: ")
@@ -80,31 +81,47 @@ while printAgain2 == True and downloadITag != "exit":
         print("Try again")
         printAgain2 = True
 
+print("Download finished")
 
 #change extension from mp4 to mp3
 if whatToDownload.video_codec is None:
-    continue_loop = True
-    while continue_loop is True:
+    continue_loop1 = True
+    while continue_loop1 is True:
         convertToMp3 = input("Do you want to change the file format from mp4 to mp3? (y/n)\nType your choice: ")
         if convertToMp3 == "y" or convertToMp3 == "n" or convertToMp3 == "exit":
-            continue_loop = False
+            continue_loop1 = False
         else:
             print("Invalid input, try again")
     if convertToMp3 == "y":
-        folder_path = path_file_content
-        old_video_name = myVideo.title + ".mp4"
-        new_video_name = myVideo.title + ".mp3"
-        Folder_path = Path(folder_path)
-        old_path = Folder_path / old_video_name
-        new_path = Folder_path / new_video_name
-        os.rename(old_path, new_path)
+        try:
+            folder_path = path_file_content
+            old_video_name = myVideo.title + ".mp4"
+            new_video_name = myVideo.title + ".mp3"
+            Folder_path = Path(folder_path)
+            old_path = Folder_path / old_video_name
+            new_path = Folder_path / new_video_name
+            os.rename(old_path, new_path)
+            print("File format change succesfull")
+        except:
+            print("failed to change the file format")
 #-----------------------------------
-        
+
+if whatToDownload.audio_codec is None:
+    continue_loop2 = True
+    while continue_loop2 is True:
+        download_audio = input("You only downloaded vieo, do you want to also download audio and merge the two together? (y/n)\nType your choice: ")
+        if download_audio == "y" or convertToMp3 == "n" or convertToMp3 == "exit":
+            continue_loop2 = False
+        else:
+            print("Invalid input, try again")
+#    if download_audio == "y":
+
+
 opened_file.close()
 print("finished")
 
 
-#download as audio
+
 #print file format as well
 #bypass apge restrictions
 #merge audio and video
