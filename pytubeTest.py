@@ -79,6 +79,8 @@ while printAgain2 == True and downloadITag != "exit":
 
 print("Download finished")
 
+
+#need to know what filetype it is, can be other than mp4
 #change extension from mp4 to mp3
 if whatToDownload.video_codec is None:
     continue_loop1 = True
@@ -106,7 +108,7 @@ if whatToDownload.audio_codec is None:
     continue_loop2 = True
     while continue_loop2 is True:
         download_audio = input("You only downloaded vieo, do you want to also download audio and merge the two together? (y/n)\nType your choice: ")
-        if download_audio == "y" or convertToMp3 == "n" or convertToMp3 == "exit":
+        if download_audio == "y" or download_audio == "n" or download_audio == "exit":
             continue_loop2 = False
         else:
             print("Invalid input, try again")
