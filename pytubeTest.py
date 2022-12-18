@@ -72,6 +72,9 @@ while printAgain2 == True and downloadITag != "exit":
         whatToDownload = myVideo.streams.get_by_itag(downloadITag)
         #why is it downloading as video????? Not sound????
         whatToDownload.download(output_path=path_file_content)
+
+        print(whatToDownload.type)
+
         printAgain2 = False
     except:
         print("Try again")
@@ -91,7 +94,7 @@ if whatToDownload.video_codec is None:
         else:
             print("Invalid input, try again")
     if convertToMp3 == "y":
-        try:
+
             folder_path = path_file_content
             old_video_name = myVideo.title + ".mp4"
             new_video_name = myVideo.title + ".mp3"
@@ -100,7 +103,7 @@ if whatToDownload.video_codec is None:
             new_path = Folder_path / new_video_name
             os.rename(old_path, new_path)
             print("File format change succesfull")
-        except:
+
             print("failed to change the file format")
 #-----------------------------------
 
@@ -124,6 +127,9 @@ if whatToDownload.audio_codec is None:
 
                 whatToDownload = myVideo.streams.get_by_itag(downloadITag)
                 whatToDownload.download(output_path=path_file_content)
+
+                codec = myVideo.streams.get_by_itag(downloadITag).audio_codec
+
                 printAgain3 = False
             except:
                 print("Try again")
